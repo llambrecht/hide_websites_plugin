@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Search Engine Blocker",
+  "version": "1.0",
+  "description": "Blocks specified websites from appearing in search engine results",
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.google.com/*", "*://*.bing.com/*"],
+      "js": ["content_script.js"]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Search Engine Blocker"
+  },
+  "icons": {
+    "48": "icon.png"
+  }
+}
