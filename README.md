@@ -14,7 +14,7 @@ This extension blocks specified websites from appearing in search engine results
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/search-engine-blocker.git
+git clone https://github.com/llambrecht/hide_websites_plugin
 cd search-engine-blocker
 ```
 
