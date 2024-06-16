@@ -1,25 +1,14 @@
-const blockedDomains = ["temu.com", "amazon.com", "temu.fr", "amazon.fr"];
+/**
+ * content_script.js
+ * 
+ * This script is responsible for injecting the 'blocker.js' script into web pages.
+ * The 'blocker.js' script contains the logic for blocking search results from specified domains.
+ * 
+ * This script is injected into web pages that match the patterns specified in the 'content_scripts' 
+ * section of the manifest.json file.
+ * 
+ */
 
-// Function to remove search results from blocked domains
-function blockSearchResults() {
-  const results = document.querySelectorAll('a'); // Select all links
-  results.forEach(result => {
-    blockedDomains.forEach(domain => {
-      // Check the href and the link text
-      if (result.href.includes(domain) || result.textContent.includes(domain)) {
-        // console.log("Blocking search result from " + domain);
-        const resultElement = result.closest('div'); // Modify as per search engine result structure
-        if (resultElement) {
-          resultElement.style.display = 'none'; // Hide the result
-        }
-      }
-    });
-  });
-}
-
-// Run the function when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', blockSearchResults);
-
-// Use a MutationObserver to detect changes in the DOM and re-run the function
-const observer = new MutationObserver(blockSearchResults);
-observer.observe(document.body, { childList: true, subtree: true });
+const script = document.createElement('script');
+script.src = chrome.extension.getURL('blocker.js');
+(document.head || document.documentElement).appendChild(script);
