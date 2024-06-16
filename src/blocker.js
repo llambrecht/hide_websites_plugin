@@ -1,3 +1,18 @@
+/**
+ * blocker.js
+ * 
+ * This script contains the logic for blocking search results from specified domains.
+ * 
+ * The 'blockedDomains' array contains the list of domains to block.
+ * 
+ * The 'blockSearchResults' function is responsible for hiding search results from the blocked domains.
+ * It selects all links on the page and checks if their href or text content includes any of the blocked domains.
+ * If a link matches a blocked domain, the function hides the closest div element (assumed to be the search result container).
+ * 
+ * The function is run when the DOM is fully loaded, and also whenever changes are made to the DOM.
+ * This is to ensure that the function also works on search results that are loaded dynamically.
+ */
+
 const blockedDomains = ["temu.com", "amazon.com", "temu.fr", "amazon.fr"];
 
 // Function to remove search results from blocked domains
