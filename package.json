@@ -1,0 +1,17 @@
+{
+  "name": "hide_websites_from_result_page",
+  "version": "1.0.0",
+  "description": "Blocks specified websites from appearing in search engine results",
+  "main": "background.js",
+  "scripts": {
+    "start": "web-ext run",
+    "build": "web-ext build",
+    "lint": "web-ext lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "web-ext": "^8.1.0"
+  }
+}
