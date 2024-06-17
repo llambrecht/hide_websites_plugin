@@ -1,8 +1,22 @@
 # Search Engine Blocker
 
-This extension blocks specified websites from appearing in search engine results.
+This project is about building a Firefox pluggin to hide certain websites from the search results.
 
-## Getting Started
+The Search Engine Blocker plugin for Firefox empowers users to filter their search results by selectively hiding websites that they find irrelevant or wish to boycott. This tool provides a customizable solution to enhance search result relevance and user experience.
+
+- **Customizable Filtering**: Tailor search results by excluding specific websites that detract from user interests or preferences.
+
+- **Enhanced User Control**: Empowers users to shape their browsing experience by omitting unwanted content from search results.
+
+<hr>
+
+**Under Development: Help Develop This Tool**
+
+This plugin is currently under construction and not yet available. You're more than welcome to contribute to its development and help shape this tool.
+
+<hr>
+
+## Getting Started (for devs)
 
 ### Prerequisites
 
