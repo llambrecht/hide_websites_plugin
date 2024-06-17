@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Extension Settings</title>
+  <link rel="stylesheet" type="text/css" href="addon_popup.css">
+</head>
+
+<body>
+  <div id="content">
+    <h1>Settings for the Hide Websites Plugin</h1>
+
+    <label for="blockedWebsites">Blocked Websites</label>
+    <ul id="blockedWebsites">
+      <!-- List items will be dynamically added here -->
+    </ul>
+
+    <label for="newWebsite">Add a Website</label>
+    <p class="addNewParagraph">When adding a new website to the list of exclusion, enter the base name (e.g., "amazon" or "example") and all variations like
+      www.amazon.com, .co.uk, or .fr will be hidden.</p>
+    <input type="text" id="newWebsite">
+    <button id="addWebsite">Add Website</button>
+
+    <p class="helpThisProject">This project is open source. If you need help or want to contribute, visit the project's GitHub page:
+      <a
+        href="https://github.com/llambrecht/hide_websites_plugin">https://github.com/llambrecht/hide_websites_plugin</a>
+    </p>
+  </div>
+
+  <script src="addon_popup.js"></script>
+</body>
+
+</html>

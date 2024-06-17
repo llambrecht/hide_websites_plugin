@@ -7,6 +7,7 @@
     "activeTab",
     "webRequest",
     "webRequestBlocking",
+    "storage",
     "<all_urls>"
   ],
   "background": {
@@ -16,13 +17,17 @@
   "content_scripts": [
     {
       "matches": ["*://*.google.com/*", "*://*.bing.com/*"],
-      "js": ["src/content_script.js"]
+      "js": ["src/content_script.js", "src/blocker.js"]
     }
   ],
   "browser_action": {
-    "default_title": "Search Engine Blocker"
+    "default_title": "Search Engine Blocker",
+    "default_popup": "src/views/popup/addon_popup.html"
+  },
+  "options_ui": {
+    "page": "src/views/popup/addon_popup.html"
   },
   "icons": {
-    "48": "icon.png"
+    "48": "assets/images/icon.png"
   }
 }
