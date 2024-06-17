@@ -32,6 +32,7 @@ function blockSearchResults() {
   });
 }
 
+
 // Run the function when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', blockSearchResults);
 
