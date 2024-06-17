@@ -13,7 +13,14 @@
  * This is to ensure that the function also works on search results that are loaded dynamically.
  */
 
-let blockedDomains = ["temu.com", "amazon.com", "temu.fr", "amazon.fr"];
+let blockedDomains = [];
+// Load blocked domains from storage
+browser.storage.local.get('blockedWebsites', function(data) {
+  if (data.blockedWebsites) {
+    blockedDomains = data.blockedWebsites;
+  }
+});
+
 
 // Function to remove search results from blocked domains
 function blockSearchResults() {
@@ -32,8 +39,8 @@ function blockSearchResults() {
   });
 }
 
-// Example: Receive messages from background script
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+// Listen for messages from the settings script
+browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if (message.action === 'updateBlockedWebsites') {
     console.log('Updating blocked websites:', message.blockedWebsites);
     

@@ -25,7 +25,7 @@
     "default_popup": "src/views/popup/addon_popup.html"
   },
   "options_ui": {
-    "page": "src/views/options/options.html"
+    "page": "src/views/popup/addon_popup.html"
   },
   "icons": {
     "48": "assets/images/icon.png"
