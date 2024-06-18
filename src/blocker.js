@@ -13,30 +13,40 @@
  * This is to ensure that the function also works on search results that are loaded dynamically.
  */
 
-let blockedDomains = [];
-// Load blocked domains from storage
+let blockedDomains = new Set();
+// Load and process blocked domains from storage
 browser.storage.local.get('blockedWebsites', function(data) {
   if (data.blockedWebsites) {
-    blockedDomains = data.blockedWebsites;
+    data.blockedWebsites.forEach(url => {
+      const baseDomain = extractBaseDomain(url);
+      if (baseDomain) blockedDomains.add(baseDomain);
+    });
   }
 });
 
+// Extract base domain from a URL and convert it to lowercase
+function extractBaseDomain(url) {
+  const match = url.match(/^(?:https?:\/\/)?(?:www\.)?([^\/:?#]+)/i);
+  return match ? match[1].replace(/(\.[a-z]{2,})+$/, '').toLowerCase() : null; // Convert to lowercase
+}
 
 // Function to remove search results from blocked domains
 function blockSearchResults() {
-  const results = document.querySelectorAll('a'); // Select all links
-  results.forEach(result => {
-    blockedDomains.forEach(domain => {
-      // Check the href and the link text
-      if (result.href.includes(domain) || result.textContent.includes(domain)) {
-        // console.log("Blocking search result from " + domain);
-        const resultElement = result.closest('div'); // Modify as per search engine result structure
-        if (resultElement) {
-          resultElement.style.display = 'none'; // Hide the result
-        }
-      }
-    });
+  document.querySelectorAll('a').forEach(link => {
+    const linkDomain = extractBaseDomain(link.href);
+    if (blockedDomains.has(linkDomain)) {
+      const resultElement = link.closest('div');
+      if (resultElement) resultElement.style.display = 'none';
+    }
   });
+}
+
+// Function to extract domain names from URLs
+function extractDomainNames(blockedWebsites) {
+    return blockedWebsites.map(url => {
+        const domainMatch = url.match(/^(?:https?:\/\/)?(?:www\.)?([^\/:]+)/i);
+        return domainMatch ? domainMatch[1].replace(/(\.[a-z]{2,})+$/, '') : '';
+    });
 }
 
 // Listen for messages from the settings script
