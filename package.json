@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jquery": "^3.6.0",
     "web-ext": "^8.1.0"
   }
 }
