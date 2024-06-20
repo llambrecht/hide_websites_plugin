@@ -16,6 +16,8 @@ mkdir -p "$RELEASE_DIR"
 
 # Copy necessary files and directories to release directory
 cp -r "$SRC_DIR" "$RELEASE_DIR"
+cp -r manifest.json "$RELEASE_DIR"
+cp -r background.js "$RELEASE_DIR"
 cp -r assets "$RELEASE_DIR"  # Example: if you have an assets directory
 
 # Exclude unwanted files and directories
