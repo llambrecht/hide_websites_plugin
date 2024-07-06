@@ -25,17 +25,30 @@ browser.storage.local.get('blockedWebsites', function(data) {
 
 // Function to remove search results from blocked domains
 function blockSearchResults() {
-  document.querySelectorAll('a').forEach(link => {
-    const linkHref = link.href.toLowerCase();
+  document.querySelectorAll('a, span').forEach(element => {
+    let elementContent = element.tagName.toLowerCase() === 'a' ? element.href.toLowerCase() : element.textContent.toLowerCase();
     blockedDomains.forEach(blockedDomain => {
-      if (linkHref.includes(blockedDomain)) {
-        const resultElement = link.closest('div');
+      if (elementContent.includes(blockedDomain)) {
+        let resultElement;
+        if (element.tagName.toLowerCase() === 'span') {
+          // If the element is a span, get the parent of the parent
+          // This is to hide in the Products section of the search results
+          resultElement = element.closest('div').closest('div');
+          // This is to ensure we hide the entire search result container.
+          while (resultElement && resultElement.tagName.toLowerCase() !== 'li') {
+            t = resultElement.tagName.toLowerCase();
+            resultElement = resultElement.parentElement;
+            console.log(resultElement);
+          }
+        } else {
+          // Otherwise, just get the parent
+          resultElement = element.closest('div');
+        }
         if (resultElement) resultElement.style.display = 'none';
       }
     });
   });
 }
-
 
 // Listen for messages from the settings script
 browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
