@@ -1,29 +1,22 @@
 #!/bin/bash
 
-# Define your addon name and version
+# Define your addon name
 ADDON_NAME="websites_hidder_for_firefox"
-ADDON_VERSION="1.0.0"
+
+# Ask the user for the version number
+echo "Enter the version number for the release:"
+read ADDON_VERSION
+
+# Check if there is a zip already and remove it if yes
+if [ -f "${ADDON_NAME}-${ADDON_VERSION}.zip" ]; then
+    rm "${ADDON_NAME}-${ADDON_VERSION}.zip"
+fi
 
 # Directory where your addon source code resides
 SRC_DIR="src"
 
-# Directory where you want to store the release package
-RELEASE_DIR="release"
-
-# Clean up any existing release directory
-rm -rf "$RELEASE_DIR"
-mkdir -p "$RELEASE_DIR"
-
-# Copy necessary files and directories to release directory
-cp -r "$SRC_DIR" "$RELEASE_DIR"
-cp -r manifest.json "$RELEASE_DIR"
-cp -r background.js "$RELEASE_DIR"
-cp -r assets "$RELEASE_DIR"  # Example: if you have an assets directory
-
-# Exclude unwanted files and directories
-cd "$RELEASE_DIR"
-rm -f README.md CONTRIBUTING.md package.json package-lock.json .gitignore
-rm -rf node_modules
-
+# Create the zip file directly
+zip -r "${ADDON_NAME}-${ADDON_VERSION}.zip" "${SRC_DIR}"/* manifest.json background.js assets/* \
+    -x "src/README.md" "src/CONTRIBUTING.md" "src/package.json" "src/package-lock.json" "src/.gitignore" "src/node_modules/*"
 
 echo "Release package created: ${ADDON_NAME}-${ADDON_VERSION}.zip"
